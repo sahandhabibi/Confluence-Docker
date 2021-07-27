@@ -1,0 +1,19 @@
+version: '2'
+services:
+  confluence:
+    image: atlassian/confluence-server
+    container_name: confluence
+    privileged: true
+    restart: always
+    ports:
+      - '80:8090'
+      - '8091:8091'
+    environment:
+      - CATALINA_OPTS="-javaagent:/var/atlassian/atlassian-agent.jar"
+      - JAVA_OPTS="-javaagent:/var/atlassian/atlassian-agent.jar"
+      - JVM_MAXIMUM_MEMORY=8000m
+      - ATL_TOMCAT_SCHEME=http
+      - ATL_TOMCAT_SECURE=false
+    volumes:
+      - ./jars/atlassian-agent.jar:/var/atlassian/atlassian-agent.jar:ro
+      - ./data:/var/atlassian/application-data/confluence/

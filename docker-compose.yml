@@ -1,7 +1,7 @@
 version: '2'
 services:
   confluence:
-    image: atlassian/confluence-server
+    image: atlassian/confluence-server:7.6.0-m35-ubuntu  
     container_name: confluence
     privileged: true
     restart: always
@@ -16,4 +16,7 @@ services:
       - ATL_TOMCAT_SECURE=false
     volumes:
       - ./jars/atlassian-agent.jar:/var/atlassian/atlassian-agent.jar:ro
-      - ./data:/var/atlassian/application-data/confluence/
+      - confluence_data:/var/atlassian/application-data/confluence/
+volumes:
+  confluence_data:
+    external: false
